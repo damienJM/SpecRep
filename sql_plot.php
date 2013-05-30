@@ -1,5 +1,5 @@
 <?php 
-$link = mysql_connect('localhost','test_user','test_password'); 
+$link = mysql_connect('localhost','root',''); 
 if (!$link) { die('Could not connect to MySQL: ' . mysql_error()); } 
 
 $simtable = "sim";
