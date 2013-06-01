@@ -67,7 +67,7 @@
 		}
 		tempData = [];
 		
-console.log(tempData);	
+	
 
 		}
 //console.log(eprData[200]);
@@ -77,7 +77,7 @@ console.log(tempData);
 
 	d3Plot = function (eprData)	{  
 		var data = eprData;
-console.log(eprData);
+
 
 		console.log(data[0]);
         var margin = {top:20, right: 15, bottom:60, left:60},
@@ -107,7 +107,13 @@ console.log(eprData);
         var xAxis = d3.svg.axis()
         			.scale(x)
         			.orient('bottom');
-
+        var line = d3.svg.line()
+        			.x(function(d,i){
+        				return x(d[0]);
+        			})
+        			.y(function(d){
+        				return y(d[1]);
+        			})
         	main.append('g')
         		.attr('transform','translate(0,'+ height + ')')
         		.attr('class','main axis date')
@@ -121,15 +127,24 @@ console.log(eprData);
         		.attr('transform','translate(0,0)')
         		.attr('class','main axis date')
         		.attr(yAxis);
-console.log(data[0]);
+
         var g = main.append("svg:g");
+        	g.append("svg:path")
+        		.data(data)
+        		.attr("class","line")
+        		.attr("stroke","steelblue")
+        		.attr("fill","none")
+        		.attr("stroke-width",3)
+        		.attr("d",line(data));
+        		
+        	
 
         	g.selectAll("scatter-dots")
         		.data(data)
         		.enter().append("svg:circle")
         		.attr("cy",function(d){return y(d[1]);})
         		.attr("cx", function(d,i){return x(d[0]);})
-        		.attr("r", 5)
+        		.attr("r", 1)
         		.style("opacity", 1);
 //
 //function(d,i) {return x(d[0]); }
