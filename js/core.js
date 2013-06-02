@@ -66,8 +66,9 @@ function readText(filePath) {
 
 	d3Plot = function (eprData)	{  
 		var data = eprData;
-
-
+        if($('.chart')[0]){
+        d3.select("svg").remove();
+        }
 		//set margins for plot
         var margin = {top:20, right: 15, bottom:60, left:60},
         	width = 960 - margin.left- margin.right,
@@ -142,8 +143,8 @@ function readText(filePath) {
         	// 	.style("opacity", 1);
 
       }
-function getOutput(){
-    $.get("server/get_output.php",function(data){
+function getOutput(fileName){
+    $.get("server/get_output.php",{fileName:fileName},function(data){
                         
                         orderContents(data);
                         
@@ -152,13 +153,11 @@ function getOutput(){
                     });
 }
 
+//add file to mongodb
 function addFiles(file){
     var data = new FormData($('form')[0]);
     console.log(file);
-    // $.post("server/upload_file.php",data: formdata,function(data){
-
-    //     console.log('file uploaded');
-    // });
+    
     $.ajax({
         url: 'server/upload_file.php',
         type: 'POST',
@@ -167,4 +166,17 @@ function addFiles(file){
         contentType: false,
         processData: false
     })
+}
+
+//get file names from db
+function getFileNames(){
+
+    $.get("server/getFileNames.php",function(data){
+        console.log(data.length);
+
+        for(var i=0;i<data.length;i++){
+
+            $('#fileList').append('<ul><a href="#" onClick="getOutput(\''+data[i]+'\');">'+data[i]+'</a></ul>');
+        }
+    },"json")
 }

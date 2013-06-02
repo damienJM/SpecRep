@@ -11,24 +11,26 @@
 	reader = new FileReader();
 	//readText from external file
 	window.onload = function(){
-        getOutput();
-        
-    
-    $('#upload').click(function(){
-        var formdata = new FormData($('form')[0]);
-        console.log('works');
-        $.ajax({
-            url:'server/upload_file.php',
-            type: 'POST',
-            success: function(){
-                console.log('works');
-            },
-            data: formdata,
-            cache: false,
-            contentType: false,
-            processData: false
+        getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
+        //load filenames from db
+        getFileNames();
+
+        //ajax request to send uploaded file to mongodb
+        $('#upload').click(function(){
+            var formdata = new FormData($('form')[0]);
+            console.log('works');
+            $.ajax({
+                url:'server/upload_file.php',
+                type: 'POST',
+                success: function(){
+                    console.log('works');
+                },
+                data: formdata,
+                cache: false,
+                contentType: false,
+                processData: false
+            })
         })
-    })
     }
     </script>
   </head>
@@ -40,8 +42,11 @@
         <input type="button" value="upload" id="upload" />
     </form>
         <br/>
+
         <hr/>   
-        <h3>Contents of the Text file:</h3>
+        <h3>List files:</h3>
+        <div id="fileList">
+        </div>
         <div id="main">
             ...
         </div>
