@@ -75,7 +75,7 @@ function readText(filePath) {
 
         //set auto scale x based on data range
         var x = d3.scale.linear()
-        			.domain([0,d3.max(data,function(d){return d[0];})])
+        			.domain([d3.min(data,function(d){return d[0];}),d3.max(data,function(d){return d[0];})])
         			.range([0, width]);
         //set auto scale y based on data range
         var y = d3.scale.linear()
@@ -150,4 +150,21 @@ function getOutput(){
                         
                         
                     });
+}
+
+function addFiles(file){
+    var data = new FormData($('form')[0]);
+    console.log(file);
+    // $.post("server/upload_file.php",data: formdata,function(data){
+
+    //     console.log('file uploaded');
+    // });
+    $.ajax({
+        url: 'server/upload_file.php',
+        type: 'POST',
+        data: formdata,
+        cache: false,
+        contentType: false,
+        processData: false
+    })
 }
