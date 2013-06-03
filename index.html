@@ -25,7 +25,12 @@
                 url:'server/upload_file.php',
                 type: 'POST',
                 success: function(data){
-                    console.log(data);
+                    if(data){
+                        $('#fileupload').append('file is already in database');
+                    }
+                    else{
+                       // getFileNames();
+                    }
                 },
                 data: formdata,
                 cache: false,
@@ -39,7 +44,7 @@
   <body>
     
 	<div id="container" class="container-fluid"> 
-        <form enctype="multipart/form-data">   
+        <form enctype="multipart/form-data" id="fileupload">   
         <input type="file" onchange='' name="file" />
         <input type="button" value="upload" id="upload" />
         </form>

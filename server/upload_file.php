@@ -13,6 +13,9 @@
 	$name = $_FILES['file']['name'];
 	//get temporary location of file for further processing
 	$file = $_FILES['file']['tmp_name'];
+	$check = $grid->findOne(array('filename' => $name));
+	//check if file is already in the db
+	if(!$check){
 	//add file to db
 	$id = $grid->storeUpload('file',$name);
 
@@ -113,9 +116,12 @@
 		$collection = $m -> selectCollection('test','parameters');
 		$collection ->insert($params);
 	}
-	$m->close();
-
 	
+}
+else{
+	echo "true";
+}
+	$m->close();
 	
 	// foreach($cursor as $document) {
 	// 	var_dump($document);

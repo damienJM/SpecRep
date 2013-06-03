@@ -11,7 +11,7 @@
 	$grid = $db->getGridFS();
 
 	//pull a cursor query
-	$cursor = $grid->find();
+	$cursor = $grid->find(array('contentType' => 'epr'));
 	
 	$m->close();
 	
