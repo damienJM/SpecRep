@@ -1,5 +1,7 @@
 <html>
   <head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
@@ -11,7 +13,7 @@
 	reader = new FileReader();
 	//readText from external file
 	window.onload = function(){
-        getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
+        //getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
         //load filenames from db
         getFileNames();
 
@@ -22,8 +24,8 @@
             $.ajax({
                 url:'server/upload_file.php',
                 type: 'POST',
-                success: function(){
-                    console.log('works');
+                success: function(data){
+                    console.log(data);
                 },
                 data: formdata,
                 cache: false,
@@ -36,20 +38,23 @@
   </head>
   <body>
     
-	    <div id="container"> 
+	<div id="container" class="container-fluid"> 
         <form enctype="multipart/form-data">   
         <input type="file" onchange='' name="file" />
         <input type="button" value="upload" id="upload" />
-    </form>
+        </form>
         <br/>
 
-        <hr/>   
-        <h3>List files:</h3>
-        <div id="fileList">
-        </div>
-        <div id="main">
-            ...
-        </div>
+        <hr/>  
+            <div id="wrapper" class="row-fluid">
+                <div class="span2"> 
+                    <h3>List files:</h3>
+                    <div id="fileList">
+                    </div>
+                </div>
+                
+            </div>
     </div>
+    
   </body>
 </html>
