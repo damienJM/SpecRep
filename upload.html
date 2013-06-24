@@ -21,7 +21,44 @@
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+       
+        <script type="text/javascript" src="js/core.js"></script>
+        <script type="text/javascript">
+                    var reader; 
+                    reader = new FileReader();
+                    //readText from external file
+                    window.onload = function(){
+                        //getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
+                        //load filenames from db
+                        //getFileNames();
 
+                        //ajax request to send uploaded file to mongodb
+                        $('#upload').click(function(){
+                            var formdata = new FormData($('form#fileupload')[0]);
+                            console.log(formdata);
+                            $.ajax({
+                                url:'server/upload_file.php',
+                                type: 'POST',
+                                success: function(data){
+                                     $('#fileupload').append(data);
+                                    if(data==='true'){
+                                        $('#fileupload').append('file is already in database');
+                                    }
+                                    else{
+                                       // getFileNames();
+                                       console.log('works');
+                                    }
+                                },
+                                data: formdata,
+                                cache: false,
+                                contentType: false,
+                                processData: false
+                            })
+                        })
+                    }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -89,42 +126,7 @@
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-        <script type="text/javascript" src="js/core.js"></script>
-        <script type="text/javascript">
-            var reader; 
-            reader = new FileReader();
-            //readText from external file
-            window.onload = function(){
-                //getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
-                //load filenames from db
-                //getFileNames();
 
-                //ajax request to send uploaded file to mongodb
-                $('#upload').click(function(){
-                    var formdata = new FormData($('form')[0]);
-                    console.log('works');
-                    $.ajax({
-                        url:'server/upload_file.php',
-                        type: 'POST',
-                        success: function(data){
-                            if(data==='true'){
-                                $('#fileupload').append('file is already in database');
-                            }
-                            else{
-                               // getFileNames();
-                            }
-                        },
-                        data: formdata,
-                        cache: false,
-                        contentType: false,
-                        processData: false
-                    })
-                })
-            }
-        </script>
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
