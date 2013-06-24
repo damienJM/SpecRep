@@ -37,7 +37,7 @@
                         //ajax request to send uploaded file to mongodb
                         $('#upload').click(function(){
                             var formdata = new FormData($('form#fileupload')[0]);
-                            console.log(formdata);
+                           
                             $.ajax({
                                 url:'server/upload_file.php',
                                 type: 'POST',
@@ -45,10 +45,12 @@
                                      $('#fileupload').append(data);
                                     if(data==='true'){
                                         $('#fileupload').append('file is already in database');
+                                        $('form#fileupload')[0].reset();
                                     }
                                     else{
                                        // getFileNames();
-                                       console.log('works');
+                                        $('#fileupload').append('File uploaded');
+                                        $('form#fileupload')[0].reset();
                                     }
                                 },
                                 data: formdata,
