@@ -55,6 +55,7 @@ d3.json("epr_data.json",function(data) {
 		.scaleExtent([0.9,10])
 		.on("zoom", zoomed);
 
+	//Init svg object
 	svg = d3.select('#chart')
 		.append("svg:svg")
 		.attr('width', width + margin.left + margin.right)
@@ -63,6 +64,7 @@ d3.json("epr_data.json",function(data) {
 		.append("svg:g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+	//Functions for scaling axes
 	var make_x_axis = function () {
 		return d3.svg.axis()
 			.scale(x)
@@ -91,6 +93,8 @@ d3.json("epr_data.json",function(data) {
 		.scale(y)
 		.orient("left")
 		.ticks(5);
+		
+	//Put axes on chart
 
 	svg.append("g")
 		.attr("class", "y axis")
@@ -108,6 +112,9 @@ d3.json("epr_data.json",function(data) {
 		.call(make_y_axis()
 		.tickSize(-width, 0, 0)
 		.tickFormat(""));
+		
+	
+	//Render stuff when zoomed in
 
 	var clip = svg.append("svg:clipPath")
 		.attr("id", "clip")
@@ -125,9 +132,8 @@ d3.json("epr_data.json",function(data) {
 		.attr("class", "line")
 		.attr("d", line);
 
+	//Function for how to behave when zooming in
 	function zoomed() {
-		console.log(d3.event.translate);
-		console.log(d3.event.scale);
 		svg.select(".x.axis").call(xAxis);
 		svg.select(".y.axis").call(yAxis);
 		svg.select(".x.grid")
