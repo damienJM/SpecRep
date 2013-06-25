@@ -62,6 +62,32 @@ function UploadFile (file) {
      }
 
      if(xhr.upload){
+        //create progress bar
+        var o = $id("progress");
+        var progress = o.appendChild(document.createElement("p"));
+        progress.appendChild(document.createTextNode("upload" + file.name));
+
+        //progress bar
+        xhr.upload.addEventListener("progress",function(e){
+            var pc = parseInt(100 - (e.loaded / e.total*100));
+            progress.style.backgroundPosition = pc + "% 0";
+        },false);
+        //file received/failed
+        xhr.onreadystatechange = function(e){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                if(xhr.responseText == "exists"){
+                    progress.className = "failure";
+                    progress.appendChild(document.createTextNode("file already in database"));
+                }
+                else{
+                    progress.className = "success";
+                }
+                
+            }
+            else{
+                progress.className = "failure";
+            }
+        };
         //start upload
         var data = new FormData();
         data.append('file',file);

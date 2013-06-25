@@ -124,7 +124,7 @@
 	
 }
 else{
-	echo "true";
+	echo "exists";
 }
 	$m->close();
 	
