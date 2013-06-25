@@ -25,42 +25,7 @@
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
        
         <script type="text/javascript" src="js/core.js"></script>
-        <script type="text/javascript">
-                    var reader; 
-                    reader = new FileReader();
-                    //readText from external file
-                    window.onload = function(){
-                        //getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
-                        //load filenames from db
-                        //getFileNames();
 
-                        //ajax request to send uploaded file to mongodb
-                        $('#upload').click(function(){
-                            var formdata = new FormData($('form#fileupload')[0]);
-                           
-                            $.ajax({
-                                url:'server/upload_file.php',
-                                type: 'POST',
-                                success: function(data){
-                                     $('#fileupload').append(data);
-                                    if(data==='true'){
-                                        $('#fileupload').append('file is already in database');
-                                        $('form#fileupload')[0].reset();
-                                    }
-                                    else{
-                                       // getFileNames();
-                                        $('#fileupload').append('File uploaded');
-                                        $('form#fileupload')[0].reset();
-                                    }
-                                },
-                                data: formdata,
-                                cache: false,
-                                contentType: false,
-                                processData: false
-                            })
-                        })
-                    }
-        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -108,11 +73,24 @@
 
         <div class="container">
 
-           <form enctype="multipart/form-data" id="fileupload">   
-        <input type="file" onchange='' name="file" />
-        <input type="button" value="upload" id="upload" />
-        </form>
-
+            <form enctype="multipart/form-data" id="fileupload"> 
+                <fieldset>
+                    <legend>File Upload</legend>
+                    <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="30000" />
+                    <div>
+                        <label for="fileselect">Files to upload:</label>
+                        <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                        <div id="filedrag">or drop files here</div>
+                    </div>
+                
+                    <div id="submitbutton">
+                        <button type="submit">Upload Files</button>
+                    </div> 
+                </fieldset>     
+               <!--  <input type="file" onchange='' name="file" />
+                <input type="button" value="upload" id="upload" /> -->
+            </form>
+            <div id="messages"></div>
             <hr>
 
             <footer>
@@ -122,13 +100,52 @@
         </div> <!-- /container -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')
+        </script>
+        //  <script type="text/javascript">
+
+
+        //             var reader; 
+        //             reader = new FileReader();
+        //             //readText from external file
+        //             window.onload = function(){
+        //                 //getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
+        //                 //load filenames from db
+        //                 //getFileNames();
+
+        //                 //ajax request to send uploaded file to mongodb
+        //                 $('#upload').click(function(){
+        //                     var formdata = new FormData($('form#fileupload')[0]);
+                           
+        //                     $.ajax({
+        //                         url:'server/upload_file.php',
+        //                         type: 'POST',
+        //                         success: function(data){
+        //                              $('#fileupload').append(data);
+        //                             if(data==='true'){
+        //                                 $('#fileupload').append('file is already in database');
+        //                                 $('form#fileupload')[0].reset();
+        //                             }
+        //                             else{
+        //                                // getFileNames();
+        //                                 $('#fileupload').append('File uploaded');
+        //                                 $('form#fileupload')[0].reset();
+        //                             }
+        //                         },
+        //                         data: formdata,
+        //                         cache: false,
+        //                         contentType: false,
+        //                         processData: false
+        //                     })
+        //                 })
+        //             }
+        // </script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-
+        <script src="js/filedrag.js"></script>
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
