@@ -4,15 +4,13 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="plot.css">
+<link rel="stylesheet" type="text/css" href="css/plot.css">
 
 </head>
 
 <div id="chart"></div>
 
 <script>
-
-//Define margins
 
 margin = {
     top: 20,
@@ -54,7 +52,7 @@ d3.json("epr_data.json",function(data) {
 	var zoom = d3.behavior.zoom()
 		.x(x)
 		.y(y)
-		.scaleExtent([-1,10])
+		.scaleExtent([0.9,10])
 		.on("zoom", zoomed);
 
 	svg = d3.select('#chart')
