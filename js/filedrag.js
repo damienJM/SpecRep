@@ -26,14 +26,22 @@ function FileSelectHandler (e) {
     //process all file objects
     for (var i = 0,f; f = files[i]; i++) {
         ParseFile(f);
+        UploadFile(f);
     }
 }
 
 // parse files to diplay
 function ParseFile (file) {
+    var type, ext = file.name.split('.').pop();
+    if(ext == 'epr'){
+        type = "Spectra data";
+    }
+    if(ext == "param"){
+        type = "Parameter data";
+    }
     Output(
             "<p>File information: <strong>" + file.name +
-            "</strong> type: <strong>" + file.type +
+            "</strong> type: <strong>" + type +
             "</strong> size: <strong>" + file.size +
             "</strong> bytes</p>"
         );
@@ -45,7 +53,7 @@ function Init () {
     var fileselect = $id("fileselect"),
         filedrag = $id("filedrag"),
         submitbutton = $id("submitbutton");
-    //fileselect
+    //process the file if the user uses the choose files button rather than drag drop
     fileselect.addEventListener("change", FileSelectHandler, false);
     //is XHR2 available?
     
