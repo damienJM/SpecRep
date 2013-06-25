@@ -11,6 +11,11 @@
 
 	//get uploaded file name
 	$name = $_FILES['file']['name'];
+
+	//get HTTP header
+	//$fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
+
+
 	//get temporary location of file for further processing
 	$file = $_FILES['file']['tmp_name'];
 	$check = $grid->findOne(array('filename' => $name));

@@ -47,6 +47,30 @@ function ParseFile (file) {
         );
 }
 
+//upload file asynchronously
+function UploadFile (file) {
+    var xhr;
+    var ext = file.name.split('.').pop();
+     if(window.XMLHttpRequest)
+     {
+        //under IE7+, chrome, FF, opera, safari
+        xhr = new XMLHttpRequest();
+     }
+     else{
+        //IE6/5
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+     }
+
+     if(xhr.upload){
+        //start upload
+        var data = new FormData();
+        data.append('file',file);
+        xhr.open("POST", "server/upload_file.php", true);
+        xhr.setRequestHeader("X_FILENAME",file.name);
+        xhr.send(data);
+     }
+}
+
 //initialize
 function Init () {
     
