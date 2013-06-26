@@ -1,16 +1,77 @@
-<head>
+parseSpectra = function (txt) {
 
-<script src="js/d3.v3.min.js" charset="utf-8"></script>
+	var txt_lines = txt.split('\n');
+	var number_of_lines = txt_lines.length;		
+	
+	//Initatilising arrays
+	//First column is field values
+	//Second column is absorption values
+	//Third colum is going to be the first derivative of col 2 wrt col 1
+
+	var eprData= [[0,0],[0,0],[0,0]];	//final data array containing col1 and col3
+	var firstCol = [],
+	 secondCol = [],
+	 thirdCol = [],
+	 tempData = [];	//temp array used to create 2d array
+
+	 
+	
+	
+	var str = "";
+	for (var i=0;i<number_of_lines-2;i++) {
+	//Lines are parsed into columns by specific formatting of my data
+	//Probably a more robust, more general way of doing this
+	firstCol[i] = parseFloat(txt_lines[i].substring(0,25));
+	secondCol[i] = parseFloat(txt_lines[i].substring(27,44));
+	
+	if (i >= 1) {
+
+	//Calcualtes derivative
+	thirdCol[i] = ((secondCol[i] - secondCol[i-1]) / (firstCol[i] - firstCol[i-1]));
+	
+	
+	tempData[0] = firstCol[i];
+	tempData[1] = thirdCol[i];
+	eprData[i] = tempData;	//push temp array into final data array
+
+	}
+	else {
+	
+	thirdCol[i] = 0;
+	tempData[0] = firstCol[i];
+	tempData[1] = thirdCol[i];
+	eprData[i] = tempData;	//push temp array into final data array
+	}
+	tempData = [];	//clear temp array
+	
 
 
+	}
+	
 
-<link rel="stylesheet" type="text/css" href="css/plot.css">
+	var JSONstr = "[";
+	for (var i=0;i<number_of_lines-2;i++) {
+		if (i>0) {
+		JSONstr += ",";
+		}
+		JSONstr += '\n';
+		JSONstr += "{";
+		JSONstr += '"x":';
+		JSONstr += firstCol[i];
+		JSONstr += ',"y":';
+		JSONstr += thirdCol[i];
+		JSONstr += "}";
+	}
+	JSONstr += "]";
+	
+	//console.log(JSONstr);
+	//d3Plot(eprData);	//send final 2d array to be plotted
+	d3Plot_JSON(JSONstr);
 
-</head>
+	}   
 
-<div id="chart"></div>
 
-<script>
+d3Plot_JSON = function(JSONstr) { 
 
 margin = {
     top: 20,
@@ -19,9 +80,8 @@ margin = {
     left: 45
 };
 
-d3.json("epr_data.json",function(data) {
-
-
+	data = JSON.parse(JSONstr);
+	
 	//Width and height
 	width = 960 - margin.left - margin.right;
 	height = 500 - margin.top - margin.bottom;
@@ -148,5 +208,6 @@ d3.json("epr_data.json",function(data) {
 			.attr("class", "line")
 			.attr("d", line);
 	}
-});
-</script>
+
+
+}
