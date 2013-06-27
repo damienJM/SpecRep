@@ -147,8 +147,13 @@ margin = {
 	data = JSON.parse(JSONstr);
 	
 	//Width and height
+<<<<<<< HEAD
 	width = 480 - margin.left - margin.right;
 	height = 250 - margin.top - margin.bottom;
+=======
+	width = 960 - margin.left - margin.right;
+	height = 500 - margin.top - margin.bottom;
+>>>>>>> origin/ZoomPlot
 
 	//Scale data to fit window
 	var x = d3.scale.linear()
@@ -179,8 +184,11 @@ margin = {
 		.scaleExtent([0.9,10])
 		.on("zoom", zoomed);
 
+<<<<<<< HEAD
 	d3.select("svg")
 		.remove();
+=======
+>>>>>>> origin/ZoomPlot
 	//Init svg object
 	svg = d3.select('#chart')
 		.append("svg:svg")
