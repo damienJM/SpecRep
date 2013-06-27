@@ -1,0 +1,20 @@
+<html>
+<head>
+<script src="js/core_local.js"></script>
+<script src="js/d3.v3.min.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript">
+d3.text("eprraw.epr",f_spc);
+
+function f_spc(text) {
+	parseSpectra(text);
+}
+</script>
+
+
+</body>
+
+</html>

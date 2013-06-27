@@ -1,67 +1,3 @@
-function readText(filePath) {
-	var output = ""; 
-        if(filePath.files && filePath.files[0]) {           
-            reader.onload = function (e) {
-                output = e.target.result;
-                parseSpectra(output);
-            };
-            reader.readAsText(filePath.files[0]);
-        }
-        return output;
-    }   
-
-function getOutput(fileName){
-    $.get("server/get_output.php",{fileName:fileName},function(data){
-                        
-                        parseSpectra(data);
-                        
-                        
-                        
-                    });
-}
-
-//add file to mongodb
-function addFiles(file){
-    var data = new FormData($('form')[0]);
-   
-    $.ajax({
-        url: 'server/upload_file.php',
-        type: 'POST',
-        data: formdata,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success:function(data){
-            if(data){
-                $('#fileupload').append('file is already in database');
-            }
-            else{
-               // getFileNames();
-            }
-        }
-    })
-}
-
-//get file names from db
-function getFileNames(){
-
-    $.get("server/getFileNames.php",function(data){
-        //console.log(data.length);
-        if(data){
-            $('#filelist').empty();
-            for(var i=0;i<data.length;i++){
-                
-                $('#fileList').append('<ul><a href="#" onClick="getOutput(\''+data[i]+'\');">'+data[i]+'</a></ul>');
-            }
-        }    
-        else{
-            
-            $('#fileList').append('<ul>no files in database</ul>');
-        }
-        
-    },"json")
-}
-
 parseSpectra = function (txt) {
 
 	var txt_lines = txt.split('\n');
@@ -147,8 +83,8 @@ margin = {
 	data = JSON.parse(JSONstr);
 	
 	//Width and height
-	width = 480 - margin.left - margin.right;
-	height = 250 - margin.top - margin.bottom;
+	width = 960 - margin.left - margin.right;
+	height = 500 - margin.top - margin.bottom;
 
 	//Scale data to fit window
 	var x = d3.scale.linear()
@@ -179,8 +115,6 @@ margin = {
 		.scaleExtent([0.9,10])
 		.on("zoom", zoomed);
 
-	d3.select("svg")
-		.remove();
 	//Init svg object
 	svg = d3.select('#chart')
 		.append("svg:svg")
