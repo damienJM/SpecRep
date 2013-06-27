@@ -1,8 +1,4 @@
 (function(){
-
- //total number of files to be uploaded
- var totalFiles = 0;
- var uploadedFiles = 0;   
 // getElementById
 function $id (id) {
     return document.getElementById(id);
@@ -27,31 +23,13 @@ function FileSelectHandler (e) {
     FileDragHover(e);
     //fetch FileList object
     var files = e.target.files || e.dataTransfer.files;
-    totalFiles = files.length;
-   
     //process all file objects
     for (var i = 0,f; f = files[i]; i++) {
-       // ParseFile(f);
+        ParseFile(f);
         UploadFile(f);
     }
-    
 }
-//total progress bar
-function progressBar (i) {
-    var progress = $id("total_progress").children[0];
-    if(i=="0"){
-        progress.style.backgroundPosition = "100% 0";
-    }
-    var pc = parseInt(100-(i / totalFiles*100));
-    progress.style.backgroundPosition = pc + "% 0";
-    if(i==totalFiles){
-        i=0;
-        totalFiles = 0;
-        uploadedFiles = 0;
-    }
-    console.log(uploadedFiles);
-    
-}
+
 // parse files to diplay
 function ParseFile (file) {
     var type, ext = file.name.split('.').pop();
@@ -87,8 +65,8 @@ function UploadFile (file) {
         //create progress bar
         var o = $id("progress");
         var progress = o.appendChild(document.createElement("p"));
-        progress.id=file.name;
         progress.appendChild(document.createTextNode("upload" + file.name));
+
         //progress bar
         xhr.upload.addEventListener("progress",function(e){
             var pc = parseInt(100 - (e.loaded / e.total*100));
@@ -103,11 +81,6 @@ function UploadFile (file) {
                 }
                 else{
                     progress.className = "success";
-                    var bar = document.getElementById(file.name);
-                    var temp = o.removeChild(bar);
-                    uploadedFiles++;
-                    progressBar(uploadedFiles);
-                   
                 }
                 
             }
@@ -122,7 +95,6 @@ function UploadFile (file) {
         xhr.setRequestHeader("X_FILENAME",file.name);
         xhr.send(data);
      }
-    
 }
 
 //initialize
@@ -142,12 +114,9 @@ function Init () {
         filedrag.addEventListener("dragover", FileDragHover, false);
         filedrag.addEventListener("dragleave", FileDragHover, false);
         filedrag.addEventListener("drop", FileSelectHandler, false);
-        //submitbutton.addEventListener("click", UploadFile, false);
+        
         //remove submit button
         submitbutton.style.display="none";
-        var q = $id("total_progress");
-        var progress = q.appendChild(document.createElement("p"));
-        
     }
 }
 
