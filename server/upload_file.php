@@ -9,6 +9,7 @@
 	//select the collection
 	$grid = $db->getGridFS();
 
+	$system = $_POST["system"];
 	//get uploaded file name
 	$name = $_FILES['file']['name'];
 

@@ -77,9 +77,28 @@
                 <fieldset>
                     <legend>File Upload</legend>
                     <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="30000" />
+                    
+                    <label>Experimental System</label>
+                    <input type="text" placeholder="Cr7Ni, Cr7Mn, etc... " name="system" />
+                    
+                    <label class="radio">
+                        <input type="radio" name="optionsRadio" id="expt" value="expt" checked="checked">Experimental Data Files</input>
+                    </label>
+                   
+                    <label class="radio">
+                        <input type="radio" name="optionsRadio" id="sim" value="sim">Simulated Data Files</input>
+                    </label>
+                    
+                    <label>Data type</label>
+                        <select id="file_type" name="file_type">
+                            <option>EPR Data</option>
+                            <option>Magnetisation Data</option>
+                            <option>Susceptibility Data</option>
+                        </select>
+                    
                     <div>
                         <label for="fileselect">Files to upload:</label>
-                        <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                        <input type="file" id="fileselect" class="btn" name="fileselect[]" multiple="multiple" />
                         <div id="filedrag">or drop files here</div>
                     </div>
                 
@@ -90,7 +109,9 @@
                <!--  <input type="file" onchange='' name="file" />
                 <input type="button" value="upload" id="upload" /> -->
             </form>
-            <div id="total_progress"></div>
+            <div class="progress">
+                <div class="bar"></div>
+            </div>
             <div id="progress"></div>
             <div id="messages">
             </div>
@@ -105,7 +126,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')
         </script>
-        //  <script type="text/javascript">
+          <script type="text/javascript">
 
 
                     //  var reader; 

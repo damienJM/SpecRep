@@ -38,18 +38,22 @@ function FileSelectHandler (e) {
 }
 //total progress bar
 function progressBar (i) {
-    var progress = $id("total_progress").children[0];
+    var progress = document.getElementsByClassName("bar")[0];
+    
     if(i=="0"){
-        progress.style.backgroundPosition = "100% 0";
+        $('.progress .bar').css('width', '0%');
     }
-    var pc = parseInt(100-(i / totalFiles*100));
-    progress.style.backgroundPosition = pc + "% 0";
+
+    var pc = parseInt((i / totalFiles*100));
+    
+    $('.progress .bar').css('width', pc + '%');
+
     if(i==totalFiles){
         i=0;
         totalFiles = 0;
         uploadedFiles = 0;
     }
-    console.log(uploadedFiles);
+        
     
 }
 // parse files to diplay
@@ -91,8 +95,8 @@ function UploadFile (file) {
         progress.appendChild(document.createTextNode("upload" + file.name));
         //progress bar
         xhr.upload.addEventListener("progress",function(e){
-            var pc = parseInt(100 - (e.loaded / e.total*100));
-            progress.style.backgroundPosition = pc + "% 0";
+            //var pc = parseInt(100 - (e.loaded / e.total*100));
+            //progress.style.backgroundPosition = pc + "% 0";
         },false);
         //file received/failed
         xhr.onreadystatechange = function(e){
@@ -116,11 +120,17 @@ function UploadFile (file) {
             }
         };
         //start upload
-        var data = new FormData();
+        //get data
+        var form = $id('fileupload');
+        var data = new FormData(form);
+        //console.log(form);
         data.append('file',file);
+        //console.log(otherData);
+        //post data to server
         xhr.open("POST", "server/upload_file.php", true);
         xhr.setRequestHeader("X_FILENAME",file.name);
         xhr.send(data);
+        
      }
     
 }
@@ -145,8 +155,8 @@ function Init () {
         //submitbutton.addEventListener("click", UploadFile, false);
         //remove submit button
         submitbutton.style.display="none";
-        var q = $id("total_progress");
-        var progress = q.appendChild(document.createElement("p"));
+        //var q = $id("total_progress");
+        //var progress = q.appendChild(document.createElement("p"));
         
     }
 }
