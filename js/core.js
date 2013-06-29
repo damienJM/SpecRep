@@ -20,6 +20,25 @@ function getOutput(fileName){
                     });
 }
 
+//function to download file
+function downloadFile(fileName){
+    // $.get("server/download_file.php",{fileName:fileName},function(data){
+    //                    var url=data;
+    //         var _iframe_dl = $('<iframe />')
+    //                    .attr('src', url)
+    //                    .hide()
+    //                    .appendTo('body');
+                        
+                        
+                        
+    //                 });
+ var url='server/download_file.php?fileName='+fileName;
+            var _iframe_dl = $('<iframe />')
+                       .attr('src', url)
+                       .hide()
+                       .appendTo('body');
+}
+
 //add file to mongodb
 function addFiles(file){
     var data = new FormData($('form')[0]);
@@ -51,7 +70,7 @@ function getFileNames(){
             $('#filelist tbody').empty();
             for(var i=0;i<data.length;i++){
                 
-                $('#filelist > tbody').append('<tr><td><a href="#" onClick="getOutput(\''+data[i][0]+'\');">'+data[i][0]+'</a></td>'
+                $('#filelist > tbody').append('<tr><td><a href="#" onClick="downloadFile(\''+data[i][0]+'\');"><i class="icon-download"></i></a></td><td><a href="#" onClick="getOutput(\''+data[i][0]+'\');">'+data[i][0]+'</a></td>'
                     +'<td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>');
 
             }
