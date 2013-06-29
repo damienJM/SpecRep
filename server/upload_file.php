@@ -10,9 +10,13 @@
 	$grid = $db->getGridFS();
 
 	$system = $_POST["system"];
+	$data_type = $_POST["optionsRadio"];
+	$file_type = $_POST["file_type"];
+
 	//get uploaded file name
 	$name = $_FILES['file']['name'];
-
+	var_dump($_FILES);
+	echo $_FILES['file']['error'];
 	//get HTTP header
 	//$fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 
@@ -24,15 +28,25 @@
 	if(!$check){
 	//add file to db
 	$id = $grid->storeUpload('file',$name);
-
+	//$id = $grid->storeFile($file);
 	//get file extension: parameter file or spectra
 	$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
 	//add additional metadata
 	$files = $db->fs->files;
 	$files->update(array("filename"=>$name),array('$set' => array("contentType"=>$ext)));
-	$param = "param";
+	
+	//store file data in array
+	$file_data = array("file_id"=>$id, "system"=>$system, "data_type"=>$data_type,"file_type"=>$file_type);
+	echo $id;
+	//select file_data collection and add array
+	$collection = $m -> selectCollection('test','file_data');
+	$collection ->insert($file_data);
+	
+
+	
 	//if a .param file parse and put into parameters collection
+	$param = "param";
 	if($ext == $param){
 		//init array for parameters
 		$params = array();

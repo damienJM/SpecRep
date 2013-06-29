@@ -46,12 +46,14 @@ function addFiles(file){
 function getFileNames(){
 
     $.get("server/getFileNames.php",function(data){
-        //console.log(data.length);
+        console.log(data);
         if(data){
-            $('#filelist').empty();
+            $('#filelist tbody').empty();
             for(var i=0;i<data.length;i++){
                 
-                $('#fileList').append('<ul><a href="#" onClick="getOutput(\''+data[i]+'\');">'+data[i]+'</a></ul>');
+                $('#filelist > tbody').append('<tr><td><a href="#" onClick="getOutput(\''+data[i][0]+'\');">'+data[i][0]+'</a></td>'
+                    +'<td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>');
+
             }
         }    
         else{

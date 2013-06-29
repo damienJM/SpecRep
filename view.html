@@ -73,17 +73,30 @@
             
                 <div class="span2"> 
                     <h3>List files:</h3>
-                    <div id="fileList">
-                    </div>
+                    
+                        <table id="filelist" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>System</th>
+                                    <th>Data type</th>
+                                    <th>File type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>    
+                        </table>
+                    
                 </div>
 				<div id="chart" align="right">
 				</div>
             
             <hr>
 
-            <footer>
+           <!--  <footer>
                 <p>&copy; Company 2012</p>
-            </footer>
+            </footer> -->
 
         </div> <!-- /container -->
 
@@ -100,11 +113,9 @@
         <script type="text/javascript" src="js/core.js"></script>
 		
         <script type="text/javascript">
-            var reader; 
-            reader = new FileReader();
-            //readText from external file
+            
             window.onload = function(){
-                //getOutput('Cr7NipCr7NigJ0.0000sigma0.8400sigmaMF0.0200.epr');
+               
                 //load filenames from db
                 getFileNames();
 
