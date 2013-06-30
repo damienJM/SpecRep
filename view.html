@@ -92,14 +92,14 @@
                                 
 
                         </form>
-                        <form class="form-search">
+                        <!-- <form class="form-search">
                             <div class="input-append offset1">
                                 <input type="text" class="span2 search-query" id="searchbox"/>
                                 <button type="submit" class="btn" id="search">Search</button>
                             </div>
                                 
 
-                        </form> 
+                        </form>  -->
             <div class="row">
                 <div class="span7">
 
@@ -169,14 +169,14 @@
                     $('select#file_type').val(0);
                     return false;
                 });
-                $('button#search').click(function(){
-                     data['data_type'] = $('#data_type').val();
-                     data['file_type'] = $('#file_type').val();
-                     data['search'] = $('#searchbox').val();
-                     getFileNames(data);
-                    $('#searchbox').val('');
-                    return false;
-                });
+                // $('button#search').click(function(){
+                //      data['data_type'] = $('#data_type').val();
+                //      data['file_type'] = $('#file_type').val();
+                //      data['search'] = $('#searchbox').val();
+                //      getFileNames(data);
+                //     $('#searchbox').val('');
+                //     return false;
+                // });
                 
             }
         </script>
