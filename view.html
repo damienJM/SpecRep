@@ -69,10 +69,40 @@
         </div>
 
         <div class="container">
-
             <div class="row">
-                <div class="span7"> 
+                <div class="span12">
                     <h3>List files:</h3>
+                        <form class="form-inline">
+
+                            <label>Data type</label>
+                                <select id="file_type" name="file_type">
+                                    <option>All</option>
+                                    <option>EPR Data</option>
+                                    <option>Magnetisation Data</option>
+                                    <option>Susceptibility Data</option>
+                                </select>
+                                 <select id="data_type" name="file_type">
+                                    <option>All</option>
+                                    <option>Simulated</option>
+                                    <option>Experimental</option> 
+                                </select>
+                                
+                                <button type="submit" class="btn btn-primary" id="filter">Filter</button>
+                                <button type="button" class="btn" id="clear_filter">Clear Filter</button>
+                                
+
+                        </form>
+                        <form class="form-search">
+                            <div class="input-append offset1">
+                                <input type="text" class="span2 search-query" id="searchbox"/>
+                                <button type="submit" class="btn" id="search">Search</button>
+                            </div>
+                                
+
+                        </form> 
+            <div class="row">
+                <div class="span7">
+
                     
                         <table id="filelist" class="table table-striped table-bordered">
                             <thead>
@@ -95,6 +125,8 @@
 				</div>
             </div>
             </div>
+        </div>
+    </div>
             <hr>
 
            <!--  <footer>
@@ -118,10 +150,33 @@
         <script type="text/javascript">
             
             window.onload = function(){
-               
+                var data = new Array();
                 //load filenames from db
                 getFileNames();
+                $('#filter').click(function(){
 
+                    data['data_type'] = $('#data_type').val();
+                     data['file_type'] = $('#file_type').val();
+                     data['search'] = "";
+                     console.log(data);
+                     getFileNames(data);
+                     return false;
+                });
+                $('button#clear_filter').click(function(){
+                    console.log('clear');
+                    getFileNames();
+                    $('select#data_type').val(0);
+                    $('select#file_type').val(0);
+                    return false;
+                });
+                $('button#search').click(function(){
+                     data['data_type'] = $('#data_type').val();
+                     data['file_type'] = $('#file_type').val();
+                     data['search'] = $('#searchbox').val();
+                     getFileNames(data);
+                    $('#searchbox').val('');
+                    return false;
+                });
                 
             }
         </script>

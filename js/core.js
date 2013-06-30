@@ -23,16 +23,7 @@ function getOutput(fileName){
 
 //function to download file
 function downloadFile(fileName){
-    // $.get("server/download_file.php",{fileName:fileName},function(data){
-    //                    var url=data;
-    //         var _iframe_dl = $('<iframe />')
-    //                    .attr('src', url)
-    //                    .hide()
-    //                    .appendTo('body');
-                        
-                        
-                        
-    //                 });
+   
  var url='server/download_file.php?fileName='+fileName;
             var _iframe_dl = $('<iframe />')
                        .attr('src', url)
@@ -63,10 +54,13 @@ function addFiles(file){
 }
 
 //get file names from db
-function getFileNames(){
-
-    $.get("server/getFileNames.php",function(data){
-        console.log(data);
+function getFileNames(filter){
+    var filter = filter || {};
+    var data_type = filter['data_type'] || "";
+    var file_type = filter['file_type'] || "";
+    var search = filter['search'] || "";
+    $.get("server/getFileNames.php",{data_type: data_type, file_type: file_type, search: search}, function(data){
+        
         if(data){
             $('#filelist tbody').empty();
             for(var i=0;i<data.length;i++){
