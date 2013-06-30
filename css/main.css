@@ -32,24 +32,23 @@
 	display: block;
 }
 
-#progress p{
+#messages {
 	display: block;
-	width: 240px;
+	width: 100%;
+	height: 500px;
 	padding: 2px 5px;
 	margin: 2px 0;
 	border: 1px inset #446;
 	border-radius: 5px;
-	background: "img/progress.png" no-repeat;
-	background-position: 100% 0;
+	overflow-y: scroll;
+	wordWrap: break-word;
 }
 
-#progress p.success {
-	background: #0c0 none 0 0 no-repeat;
+#messages p.failure{
+	color: red;
 }
 
-#progress p.failed {
-	background: #c00 none 0 0 no-repeat;
-}
+
 
 
 .bar {

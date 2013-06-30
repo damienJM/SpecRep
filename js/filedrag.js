@@ -40,18 +40,23 @@ function FileSelectHandler (e) {
 function progressBar (i) {
     var progress = document.getElementsByClassName("bar")[0];
     
-    if(i=="0"){
+    if(uploadedFiles=="0"){
+        
         $('.progress .bar').css('width', '0%');
     }
 
-    var pc = parseInt((i / totalFiles*100));
+    var pc = parseInt((i / totalFiles+1*100));
     
     $('.progress .bar').css('width', pc + '%');
 
-    if(i==totalFiles){
+    if(i==totalFiles-1){
+        var o = $id("total");
+        var total = o.appendChild(document.createElement("p"));
+        total.appendChild(document.createTextNode(uploadedFiles+1 +" files successfully uploaded."));
         i=0;
         totalFiles = 0;
         uploadedFiles = 0;
+        console.log(totalFiles);
     }
         
     
@@ -92,7 +97,7 @@ function UploadFile (file) {
         var o = $id("messages");
         var message = o.appendChild(document.createElement("p"));
         message.id=file.name;
-        message.appendChild(document.createTextNode(file.name));
+       
         //progress bar
         xhr.upload.addEventListener("progress",function(e){
             //var pc = parseInt(100 - (e.loaded / e.total*100));
@@ -104,12 +109,14 @@ function UploadFile (file) {
                 console.log(xhr.responseText);
                 if(xhr.responseText == "exists"){
                     message.className = "failure";
-                    message.appendChild(document.createTextNode("file already in database"));
+                    message.appendChild(document.createTextNode(file.name +"..... already in database"));
+                    uploadedFiles++;
                 }
                 else{
                     message.className = "success";
-                    var bar = document.getElementById(file.name);
-                    var temp = o.removeChild(bar);
+                    message.appendChild(document.createTextNode(file.name +".......success"));
+                    //var bar = document.getElementById(file.name);
+                    //var temp = o.removeChild(bar);
                     uploadedFiles++;
                     progressBar(uploadedFiles);
                    
