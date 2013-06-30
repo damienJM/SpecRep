@@ -89,10 +89,10 @@ function UploadFile (file) {
 
      if(xhr.upload){
         //create progress bar
-        var o = $id("progress");
-        var progress = o.appendChild(document.createElement("p"));
-        progress.id=file.name;
-        progress.appendChild(document.createTextNode("upload" + file.name));
+        var o = $id("messages");
+        var message = o.appendChild(document.createElement("p"));
+        message.id=file.name;
+        message.appendChild(document.createTextNode(file.name));
         //progress bar
         xhr.upload.addEventListener("progress",function(e){
             //var pc = parseInt(100 - (e.loaded / e.total*100));
@@ -101,12 +101,13 @@ function UploadFile (file) {
         //file received/failed
         xhr.onreadystatechange = function(e){
             if(xhr.readyState == 4 && xhr.status == 200){
+                console.log(xhr.responseText);
                 if(xhr.responseText == "exists"){
-                    progress.className = "failure";
-                    progress.appendChild(document.createTextNode("file already in database"));
+                    message.className = "failure";
+                    message.appendChild(document.createTextNode("file already in database"));
                 }
                 else{
-                    progress.className = "success";
+                    message.className = "success";
                     var bar = document.getElementById(file.name);
                     var temp = o.removeChild(bar);
                     uploadedFiles++;
@@ -116,7 +117,7 @@ function UploadFile (file) {
                 
             }
             else{
-                progress.className = "failure";
+                message.className = "failure";
             }
         };
         //start upload

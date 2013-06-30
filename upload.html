@@ -21,9 +21,11 @@
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-       
+        
         <script type="text/javascript" src="js/core.js"></script>
 
     </head>
@@ -32,7 +34,7 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+      
 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
@@ -72,7 +74,8 @@
         </div>
 
         <div class="container">
-
+        <div class="row">
+            <div class="span 3">
             <form enctype="multipart/form-data" id="fileupload" action="server/upload_file.php"> 
                 <fieldset>
                     <legend>File Upload</legend>
@@ -95,7 +98,25 @@
                             <option>Magnetisation Data</option>
                             <option>Susceptibility Data</option>
                         </select>
-                    
+                    <div id="eprExtras">
+                        <label>Supplementary EPR information</label>
+                            <select id="epr_type" name="epr_type">
+                                <option>Q Band</option>
+                                <option>W Band</option>
+                            </select>
+                    </div>
+                    <div id="magExtras">
+                        <label>Supplementary Infromation</label>
+                            <div class="input-append">
+                            <input type="text" placeholder="Temperature in K" name="temperature" />
+                            <span class="add-on">K</span>
+                        </div>
+                        <br/>
+                        <div class="input-append">
+                            <input type="text" placeholder="Field in T" name="magfield" />
+                            <span class="add-on">T</span>
+                        </div>
+                    </div>
                     <div>
                         <label for="fileselect">Files to upload:</label>
                         <input type="file" id="fileselect" class="btn" name="fileselect[]" multiple="multiple" />
@@ -109,14 +130,17 @@
                <!--  <input type="file" onchange='' name="file" />
                 <input type="button" value="upload" id="upload" /> -->
             </form>
+        
+              
             <div class="progress">
                 <div class="bar"></div>
             </div>
             <div id="progress"></div>
             <div id="messages">
             </div>
+        </div>    
             <hr>
-
+        </div>
             <footer>
                 <p>&copy; Company 2012</p>
             </footer>
@@ -124,6 +148,7 @@
         </div> <!-- /container -->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+       
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')
         </script>
          
@@ -132,11 +157,33 @@
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         <script src="js/filedrag.js"></script>
+        <script type="text/javascript">
+
+            $('#file_type').change(function(){
+                var epr = $('#eprExtras');
+                var mag = $('#magExtras');
+                var dataType = $('#file_type').val();
+                if(dataType == 'Magnetisation Data' || 'Susceptibility Data'){
+                    $('#eprExtras').css('display','none');
+                    $('#magExtras').css('display','block');
+                }
+                if(dataType == 'EPR Data'){
+                    $('#eprExtras').css('display','block');
+                    $('#magExtras').css('display','none');
+                }
+
+                console.log(dataType);
+            })
+            
+
+        </script>
+       
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+    
     </body>
 </html>

@@ -12,11 +12,14 @@
 	$system = $_POST["system"];
 	$data_type = $_POST["optionsRadio"];
 	$file_type = $_POST["file_type"];
-
+	$epr_type = $_POST["epr_type"];
+	$temp = $_POST["temperature"];
+	$field = $_POST["magfield"];
+	echo $field;
 	//get uploaded file name
 	$name = $_FILES['file']['name'];
-	var_dump($_FILES);
-	echo $_FILES['file']['error'];
+	
+	//echo $_FILES['file']['error'];
 	//get HTTP header
 	//$fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 
@@ -37,8 +40,8 @@
 	$files->update(array("filename"=>$name),array('$set' => array("contentType"=>$ext)));
 	
 	//store file data in array
-	$file_data = array("file_id"=>$id, "system"=>$system, "data_type"=>$data_type,"file_type"=>$file_type);
-	echo $id;
+	$file_data = array("file_id"=>$id, "system"=>$system, "data_type"=>$data_type,"file_type"=>$file_type, "epr_type"=>$epr_type,"temperature"=>$temp, "magfield"=>$field);
+	
 	//select file_data collection and add array
 	$collection = $m -> selectCollection('test','file_data');
 	$collection ->insert($file_data);
