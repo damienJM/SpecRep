@@ -29,7 +29,7 @@ function FileSelectHandler (e) {
     //fetch FileList object
     files = e.target.files || e.dataTransfer.files;
     totalFiles = files.length;
-   
+    $('.progress .bar').css('width', '0%');
     //process all file objects
     for (var i = 0,f; f = files[i]; i++) {
         ParseFile(f);
@@ -42,6 +42,7 @@ function FileSelectHandler (e) {
 function FileUploadHandler (e) {
     e.stopPropagation();
     e.preventDefault();
+    //check if a system has been defined, otherwise display error
     if($('#system').val()==''){
         $('#meas_system').addClass('control-group error');
         $('#meas_system span').removeClass('hidden');
@@ -50,6 +51,7 @@ function FileUploadHandler (e) {
             $('#submitbutton span').addClass('hidden');
         }
     }
+    //check if any files have been selected, otherwise display error
     if(files==''){
         $('#submitbutton').addClass('control-group error');
         $('#submitbutton span').removeClass('hidden');
@@ -59,6 +61,7 @@ function FileUploadHandler (e) {
         }
         
     }
+    //if everything is correct, remove errors and upload files
     if($('#system').val()!='' && files != ''){
      
         $('#meas_system').removeClass('control-group error');
@@ -75,6 +78,7 @@ function FileUploadHandler (e) {
     }
     $("#fileuploadlist").empty();
     files = '';
+    
 }
 }
 //total progress bar
@@ -97,7 +101,7 @@ function progressBar (i) {
         i=0;
         totalFiles = 0;
         uploadedFiles = 0;
-        console.log(totalFiles);
+        
     }
         
     
@@ -107,9 +111,9 @@ function ParseFile (file) {
     
     var type, ext = file.name.split('.').pop();
     var o = $id("fileuploadlist");
-    console.log(o);
-        var filename = o.appendChild(document.createElement("p"));
-        filename.appendChild(document.createTextNode(file.name));
+    
+    var filename = o.appendChild(document.createElement("p"));
+    filename.appendChild(document.createTextNode(file.name));
     
 }
 
