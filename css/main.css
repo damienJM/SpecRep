@@ -54,7 +54,12 @@
 .bar {
 	width:0%;
 }
-
+#filedrag #fileuploadlist {
+	margin-left:5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
 table#filelist {
 	word-wrap: break-word;
 	width: 100%;

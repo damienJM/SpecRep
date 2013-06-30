@@ -2,7 +2,8 @@
 
  //total number of files to be uploaded
  var totalFiles = 0;
- var uploadedFiles = 0;   
+ var uploadedFiles = 0;
+ var files = '';   
 // getElementById
 function $id (id) {
     return document.getElementById(id);
@@ -26,15 +27,55 @@ function FileSelectHandler (e) {
     //cancel event and hover styling
     FileDragHover(e);
     //fetch FileList object
-    var files = e.target.files || e.dataTransfer.files;
+    files = e.target.files || e.dataTransfer.files;
     totalFiles = files.length;
    
     //process all file objects
     for (var i = 0,f; f = files[i]; i++) {
-       // ParseFile(f);
-        UploadFile(f);
+        ParseFile(f);
+        //UploadFile(f);
     }
     
+}
+
+//file upload handler
+function FileUploadHandler (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if($('#system').val()==''){
+        $('#meas_system').addClass('control-group error');
+        $('#meas_system span').removeClass('hidden');
+        if(files != ''){
+            $('#submitbutton').removeClass('control-group error');
+            $('#submitbutton span').addClass('hidden');
+        }
+    }
+    if(files==''){
+        $('#submitbutton').addClass('control-group error');
+        $('#submitbutton span').removeClass('hidden');
+        if($('#system').val()!=''){
+            $('#meas_system').removeClass('control-group error');
+            $('#meas_system span').addClass('hidden');
+        }
+        
+    }
+    if($('#system').val()!='' && files != ''){
+     
+        $('#meas_system').removeClass('control-group error');
+        $('#meas_system span').addClass('hidden');
+        $('#submitbutton').removeClass('control-group error');
+        $('#submitbutton span').addClass('hidden');
+        totalFiles = files.length;
+   
+    //process all file objects
+    for (var i = 0,f; f = files[i]; i++) {
+        //ParseFile(f);
+        UploadFile(f);
+
+    }
+    $("#fileuploadlist").empty();
+    files = '';
+}
 }
 //total progress bar
 function progressBar (i) {
@@ -63,19 +104,13 @@ function progressBar (i) {
 }
 // parse files to diplay
 function ParseFile (file) {
+    
     var type, ext = file.name.split('.').pop();
-    if(ext == 'epr'){
-        type = "Spectra data";
-    }
-    if(ext == "param"){
-        type = "Parameter data";
-    }
-    Output(
-            "<p>File information: <strong>" + file.name +
-            "</strong> type: <strong>" + type +
-            "</strong> size: <strong>" + file.size +
-            "</strong> bytes</p>"
-        );
+    var o = $id("fileuploadlist");
+    console.log(o);
+        var filename = o.appendChild(document.createElement("p"));
+        filename.appendChild(document.createTextNode(file.name));
+    
 }
 
 //upload file asynchronously
@@ -160,9 +195,9 @@ function Init () {
         filedrag.addEventListener("dragover", FileDragHover, false);
         filedrag.addEventListener("dragleave", FileDragHover, false);
         filedrag.addEventListener("drop", FileSelectHandler, false);
-        //submitbutton.addEventListener("click", UploadFile, false);
+        submitbutton.addEventListener("click", FileUploadHandler, false);
         //remove submit button
-        submitbutton.style.display="none";
+        //submitbutton.style.display="none";
         //var q = $id("total_progress");
         //var progress = q.appendChild(document.createElement("p"));
         

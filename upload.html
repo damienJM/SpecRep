@@ -82,10 +82,11 @@
                 <fieldset>
                     <legend>File Upload</legend>
                    <!--  <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="3000000" /> -->
-                    
+                    <div id="meas_system" >
                     <label>Experimental System</label>
-                    <input type="text" placeholder="Cr7Ni, Cr7Mn, etc... " name="system" />
-                    
+                    <input type="text" placeholder="Cr7Ni, Cr7Mn, etc... " name="system" id="system"/>
+                    <span class="help-inline hidden" >Please proved measurement system</span>
+                    </div>
                     <label class="radio">
                         <input type="radio" name="optionsRadio" id="expt" value="Experimental" checked="checked">Experimental Data Files</input>
                     </label>
@@ -122,12 +123,16 @@
                     <div>
                         <label for="fileselect">Files to upload:</label>
                         <input type="file" id="fileselect" class="btn" name="fileselect[]" multiple="multiple" />
-                        <div id="filedrag">or drop files here</div>
+                        <div id="filedrag">or drop files here
+                           <div id="fileuploadlist"></div>
+                        </div>
                     </div>
                 
-                    <div id="submitbutton">
+                    <div id="submitbutton" >
                         <button type="submit">Upload Files</button>
+                        <span class='help-inline hidden'>Please select or drag some files to be uploaded</span>
                     </div> 
+
                 </fieldset>     
                <!--  <input type="file" onchange='' name="file" />
                 <input type="button" value="upload" id="upload" /> -->

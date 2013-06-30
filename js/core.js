@@ -31,27 +31,7 @@ function downloadFile(fileName){
                        .appendTo('body');
 }
 
-//add file to mongodb
-function addFiles(file){
-    var data = new FormData($('form')[0]);
-   
-    $.ajax({
-        url: 'server/upload_file.php',
-        type: 'POST',
-        data: formdata,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success:function(data){
-            if(data){
-                $('#fileupload').append('file is already in database');
-            }
-            else{
-               // getFileNames();
-            }
-        }
-    })
-}
+
 
 //get file names from db
 function getFileNames(filter){
