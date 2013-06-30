@@ -30,6 +30,7 @@ function FileSelectHandler (e) {
     files = e.target.files || e.dataTransfer.files;
     totalFiles = files.length;
     $('.progress .bar').css('width', '0%');
+    $('#system').val('');
     //process all file objects
     for (var i = 0,f; f = files[i]; i++) {
         ParseFile(f);
