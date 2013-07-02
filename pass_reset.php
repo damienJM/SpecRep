@@ -1,3 +1,7 @@
+<?PHP
+require_once('lib/connections/db.php');
+include('lib/functions/functions.php');
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -69,32 +73,24 @@
         </div>
 
         <div class="container">
-            <div class="done"><p>Registration successful! <a href="login.php">Click here</a> to login.</p></div><!--close done-->
-            <form class="form-horizontal" id="loginForm" action="server/reg_submit.php" method="post">
+        
+            <div class="done"><H3>New password sent.</H3><p>Check your inbox / junk mail folder for a link to reset your password.</p></div><!--close done-->
+            <form class="form-horizontal" id="passreset" action="server/pass_reset_submit.php" method="post">
                 <fieldset>
-                    <legend>Login</legend>
+                    <legend>Please enter your email address below</legend>
                     <div class="control-group">
-                        <label class="control-label" for="username">Username</label>
+                        <label class="control-label" for="email">Your Email</label>
                             <div class="controls">
-                                <input type="text" id="username" name="username" placeholder="username" />
+                                <input type="text" id="email" name="email" placeholder="Email" />
                             </div>
                     </div>
 
-                    
-
-                    <div class="control-group">
-                        <label class="control-label" for="password">Password</label>
-                            <div class="controls">
-                                <input type="password" id="password" name="password" placeholder="Password" />
-                            </div>
-                    </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        <button type="button" class="btn">Cancel</button>
-                        <img id="loading" src="img/loading.gif" alt="Logging in.." />
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <img id="loading" src="img/loading.gif" alt="Sending.." />
                         <div id="error">&nbsp;</div>
-                        <a href="pass_reset.php">Password recovery?</a>
+                        
                     </div>
                 </fieldset>
             </form>
@@ -120,15 +116,15 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
         <script type="text/javascript" src="js/core.js"></script>
         <script type="text/javascript">
-            $(document).ready(function(){
-    
-            $('#loginForm').submit(function(e) {
-                login();
-                e.preventDefault();
-                return false; 
-            }); 
-        });
-        </script>
+			$(document).ready(function(){
+	
+				$('#passreset').submit(function(e) {
+					passreset();
+					e.preventDefault();	
+				});	
+			});
+
+		</script>
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
@@ -137,3 +133,7 @@
         </script>
     </body>
 </html>
+
+
+
+	

@@ -91,7 +91,7 @@ function passreset()
 	
 	$.ajax({
 		type: "POST",
-		url: "pass_reset_submit.php",		
+		url: "server/pass_reset_submit.php",		
 		data: $('#passreset').serialize(),
 		dataType: "json",
 		success: function(msg){
@@ -184,7 +184,7 @@ function updatepass()
 	
 	$.ajax({
 		type: "POST",
-		url: "change_pass_submit.php",		
+		url: "server/change_pass_submit.php",		
 		data: $('#updatepassForm').serialize(),
 		dataType: "json",
 		success: function(msg){

@@ -1,3 +1,31 @@
+<?PHP
+DEFINE('INCLUDE_CHECK',1);
+require_once('lib/connections/db.php');
+include('lib/functions/functions.php');
+
+$activation_key = '';
+	if (isset($_GET['activation_key'])){
+		$activation_key = $_GET['activation_key'];
+	}
+
+	$res = confirm_user_reg($activation_key);
+		if ($res == 1){
+			$error = "Failed to activate account. Please contact the site admin.";
+			}
+		if ($res == 2){
+			$error = "Your account is already active!";
+			}
+		if ($res == 3){
+			$error = "This user does not exist.";
+			}
+		if ($res == 99){
+			$message = "Congratulations! Your account has been activated. You may now <a href='login.php'>login</a> and start using it.";
+			}
+
+
+$sitesettings = getSiteSettings();
+?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -69,36 +97,16 @@
         </div>
 
         <div class="container">
-            <div class="done"><p>Registration successful! <a href="login.php">Click here</a> to login.</p></div><!--close done-->
-            <form class="form-horizontal" id="loginForm" action="server/reg_submit.php" method="post">
-                <fieldset>
-                    <legend>Login</legend>
-                    <div class="control-group">
-                        <label class="control-label" for="username">Username</label>
-                            <div class="controls">
-                                <input type="text" id="username" name="username" placeholder="username" />
-                            </div>
-                    </div>
-
-                    
-
-                    <div class="control-group">
-                        <label class="control-label" for="password">Password</label>
-                            <div class="controls">
-                                <input type="password" id="password" name="password" placeholder="Password" />
-                            </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        <button type="button" class="btn">Cancel</button>
-                        <img id="loading" src="img/loading.gif" alt="Logging in.." />
-                        <div id="error">&nbsp;</div>
-                        <a href="pass_reset.php">Password recovery?</a>
-                    </div>
-                </fieldset>
-            </form>
-
+           
+        	<?php
+        	 if(isset($error))
+					{
+						echo '<div class="error">' . $error . '</div>' . "\n";
+					}
+					   else if(isset($message)) {
+							echo '<div class="message">' . $message . '</div>' . "\n";
+						} 
+			?>
            
             <hr/>
             <footer>
@@ -137,3 +145,4 @@
         </script>
     </body>
 </html>
+				

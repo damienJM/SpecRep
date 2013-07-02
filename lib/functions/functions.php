@@ -132,7 +132,7 @@ function checkLogin ( $levels )
 		}
 		
 		if ( $access == FALSE ) {
-			header("Location: login.php");
+			header("Location: ../login.html");
 		}		
 }
 	
@@ -482,12 +482,6 @@ function getUserRecords($id)
 		$getuser[$c]["first_name"] = $a_row["first_name"];
 		$getuser[$c]["last_name"] = $a_row["last_name"];
 		$getuser[$c]["email"] = $a_row["email"];
-		$getuser[$c]["dialing_code"] = $a_row["dialing_code"];
-		$getuser[$c]["phone"] = $a_row["phone"];
-		$getuser[$c]["city"] = $a_row["city"];
-		$getuser[$c]["country"] = $a_row["country"];
-		$getuser[$c]["thumb_path"] = $a_row["thumb_path"];
-		$getuser[$c]["img_path"] = $a_row["img_path"];
 		$getuser[$c]["active"] = $a_row["active"];
 		$getuser[$c]["reg_date"] = $a_row["reg_date"];
 		$getuser[$c]["last_active"] = $a_row["last_active"];
