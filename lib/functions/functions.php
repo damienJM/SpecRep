@@ -41,6 +41,9 @@ function login($user,$pass)
 					if ($row['level_access'] == 2) {									
 						return 99;
 						}
+					if ($row['level_access'] == 1) {									
+						return 99;
+						}
 			}
 			if ($row['active'] == 2) {return 2;}
 			if ($row['active'] == 0) {return 3;}			

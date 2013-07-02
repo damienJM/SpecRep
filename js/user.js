@@ -5,7 +5,7 @@ function login()
 	
 	$.ajax({
 		type: "POST",
-		url: "login_submit.php",		
+		url: "server/login_submit.php",		
 		data: $('#loginForm').serialize(),
 		dataType: "json",
 		success: function(msg){
@@ -15,7 +15,7 @@ function login()
 				error(1,msg.txt);
 			}
 			else location.replace(msg.txt);
-			
+			console.log(msg.txt);
 			hideshow('loading',0);
 		}
 	});
