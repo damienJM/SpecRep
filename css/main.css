@@ -66,7 +66,66 @@ table#filelist {
 	max-width: 100%;
 }
 
+#loading{
+	left:10px;
+	position:relative;
+	top:3px;
+	visibility:hidden;
+}
 
+#error{
+	background-color:#ffebe8;
+	border:1px solid #dd3c10;
+	padding:7px 3px;
+	text-align:center;
+	color:#b00000;
+	margin-top:10px;
+	visibility:hidden;
+	font-family:"Lucida Grande",Tahoma,Verdana,Arial,sans-serif;
+	font-size:12px; 
+	color:#165a16;
+	text-align:center;
+}
+
+.done{
+	background:#b8edb8;
+	border:1px solid #269926;
+	padding:10px;
+	width:90%; 
+	margin:20px auto; 
+	display:none;
+}
+
+.done p{
+	font-family:"Lucida Grande",Tahoma,Verdana,Arial,sans-serif;
+	font-size:12px; 
+	color:#165a16;
+	text-align:center;
+}
+
+.message{
+	background:#b8edb8;
+	border:1px solid #269926;
+	padding:10px;
+	width:90%; 
+	margin:20px auto; 
+	font-family:"Lucida Grande",Tahoma,Verdana,Arial,sans-serif;
+	font-size:12px; 
+	color:#165a16;
+	text-align:center;
+}
+
+.error{
+	background:#ffbfbf;
+	border:1px solid #ff0000;
+	padding:10px;
+	width:90%; 
+	margin:20px auto; 
+	font-family:"Lucida Grande",Tahoma,Verdana,Arial,sans-serif;
+	font-size:12px; 
+	color:#ff0000;
+	text-align:center;
+}
 
 
 
