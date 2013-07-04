@@ -118,8 +118,8 @@
                     </div>
                     <div id="error">&nbsp;</div>
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Create Project</button>
-                        <button type="button" class="btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" >Create Project</button>
+                        <button type="button" class="btn" data-dismiss="modal">Cancel</button>
                         <img id="loading" src="img/loading.gif" alt="working.." />
                     </div>
                 </fieldset>
@@ -143,9 +143,17 @@
         <script type="text/javascript">
             
             window.onload = function(){
-               
+               //getProjects();
                 
             }
+            $(document).ready(function(){
+    
+            $('#newProject').submit(function(e) {
+                //createProject();
+                e.preventDefault();
+                return false; 
+            }); 
+        });
         </script>
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
