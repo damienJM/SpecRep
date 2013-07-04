@@ -2,7 +2,7 @@
 require_once('../lib/connections/db.php');
 include('../lib/functions/functions.php');
 
-$returnURL = "index.html";
+$returnURL = "index.php";
 
 //For login
 

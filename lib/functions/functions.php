@@ -132,7 +132,7 @@ function checkLogin ( $levels )
 		}
 		
 		if ( $access == FALSE ) {
-			header("Location: ../login.html");
+			header("Location: ../login.php");
 		}		
 }
 	
