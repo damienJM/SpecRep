@@ -68,7 +68,7 @@
                                 <?php
                                     if(!empty($_SESSION['logged_in'])){
                                         
-                                        echo '<li><a href="logout.php">Logout</a></li>';
+                                        echo '<li><a href="log_off.php">Logout</a></li>';
                                     }
                                     else{
                                         
