@@ -25,6 +25,6 @@ $action='';
 	
 </head>
 <body>
-	<div class="message" align="center">You have been logged out. <a href="login.html">Click here</a> to log in.</div>
+	<div class="message" align="center">You have been logged out. <a href="index.php">Click here</a> to log in.</div>
 </body>
 </html>

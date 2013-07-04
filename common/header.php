@@ -1,6 +1,11 @@
 <?php
+    require_once('./lib/connections/db.php');
+    include('./lib/functions/functions.php');
      if(empty($_SESSION['logged_in'])){
             session_start();
+            if(isset($_SESSION['logged_in'])){
+                $getuser = getUserRecords($_SESSION['user_id']);
+            }
         }
 ?>
 <!DOCTYPE html>
@@ -50,25 +55,30 @@
                             <li class="active"><a href="index.php">Home</a></li>
                             <li><a href="#about">About</a></li>
                             <li><a href="#contact">Contact</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="upload.php">Upload Files</a></li>
-                                    <li><a href="view.php">List Files</a></li>
-                                    <li><a href="plot.php">Plot Files</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
+                            <?php
+                                 if(!empty($_SESSION['logged_in'])){
+                                    echo '<li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="upload.php">Upload Files</a></li>
+                                            <li><a href="view.php">List Files</a></li>
+                                            <li><a href="plot.php">Plot Files</a></li>
+                                            <li class="divider"></li>
+                                            <li class="nav-header">Nav header</li>
+                                            <li><a href="#">Separated link</a></li>
+                                            <li><a href="#">One more separated link</a></li>
+                                        </ul>
+                                    </li>';
+                                }
+                            ?>
                         </ul>
                         <div class="navbar-form pull-right">
                             <ul class="nav">
                                 <?php
                                     if(!empty($_SESSION['logged_in'])){
                                         
-                                        echo '<li><a href="log_off.php">Logout</a></li>';
+                                        echo '<li><a href="#">'.$getuser[0]['username'].'</a></li>
+                                        <li><a href="log_off.php?action=logoff">Logout</a></li>';
                                     }
                                     else{
                                         
