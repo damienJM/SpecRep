@@ -24,7 +24,9 @@ try:
             toggle = 1;
             
 finally:
-fin.close()
+    fin.close()
+
 
 print('Number of arguments:', len(sys.argv));
 print('Argument List:',str(sys.argv));
+
