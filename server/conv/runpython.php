@@ -1,7 +1,7 @@
 <?php
 
 
-function checkfile($result) {
+function parse_python_output($result) {
 
 	echo substr($result,0,-1);
 
