@@ -20,7 +20,7 @@
                 <div class="span8 offset2">
 
                     
-                        <table id="filelist" class="table table-striped table-bordered">
+                        <table id="projectlist" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -58,7 +58,7 @@
                 <h3>Create a new project</h3>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="newProject" action="server/project_create.php" method="post">
+                <form class="form-horizontal" id="newProject" action="#" method="post">
                 <fieldset>
                     
                     <div class="control-group">
@@ -137,21 +137,31 @@
         <script src="js/main.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<!-- 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+         -->
         <script type="text/javascript" src="js/core.js"></script>
 		
         <script type="text/javascript">
             
             window.onload = function(){
-               //getProjects();
+               getProjects();
                 
             }
             $(document).ready(function(){
-    
+           
             $('#newProject').submit(function(e) {
-                //createProject();
+
                 e.preventDefault();
-                return false; 
+                //createProject();
+                console.log("test");
+                $.post('server/project_create.php',$('#newProject').serialize(),function(data){
+                   $('#createProject').modal('hide');
+                   $('#newProject')[0].reset();
+                   getProjects();
+                });
+                 
+                
             }); 
         });
         </script>

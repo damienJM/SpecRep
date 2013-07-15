@@ -58,6 +58,27 @@ function getFileNames(filter){
     },"json")
 }
 
+//create a new project
+function getProjects () {
+
+	 $.get("server/getProjects.php", function(data){
+        
+        if(data){
+            $('#projectlist tbody').empty();
+            for(var i=0;i<data.length;i++){
+                
+                $('#projectlist > tbody').append('<tr><td></td><td>'+data[i][0]+'</td>'
+                    +'<td>0</td><td>0</td></tr>');
+
+            }
+        }    
+        else{
+            
+            $('#fileList').append('<ul>no files in database</ul>');
+        }
+        
+    },"json")
+}
 parseSpectra = function (txt) {
 
 	var txt_lines = txt.split('\n');
