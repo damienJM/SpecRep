@@ -45,7 +45,7 @@ function getFileNames(filter){
             $('#filelist tbody').empty();
             for(var i=0;i<data.length;i++){
                 
-                $('#filelist > tbody').append('<tr><td><a href="" onClick="downloadFile(\''+data[i][0]+'\');"><i class="icon-download"></i></a></td><td><a href="#" onClick="getOutput(\''+data[i][0]+'\'); return false;">'+data[i][0]+'</a></td>'
+                $('#filelist > tbody').append('<tr><td><a href="" onClick="downloadFile(\''+data[i][0]+'\');return false;"><i class="icon-download"></i></a></td><td><a href="#" onClick="getOutput(\''+data[i][0]+'\'); return false;">'+data[i][0]+'</a></td>'
                     +'<td>'+data[i][1]+'</td><td>'+data[i][2]+'</td><td>'+data[i][3]+'</td></tr>');
 
             }

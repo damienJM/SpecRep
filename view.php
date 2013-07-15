@@ -3,8 +3,10 @@
 
 ?>
         <div class="container">
-            <div class="row">
-                <div class="span12">
+           
+            <div class="row-fluid">
+                
+                <div class="span7">
                     <h3>List files:</h3>
                         <form class="form-inline">
 
@@ -34,8 +36,7 @@
                                 
 
                         </form>  -->
-            <div class="row-fluid">
-                <div class="span7">
+           
 
                     
                         <table id="filelist" class="table table-striped table-bordered">
@@ -53,16 +54,18 @@
                             </tbody>    
                         </table>
                     
+                
                 </div>
+            
+            
                 <div class="span5">
-				<div id="chart" data-spy="affix" align="right">
+				<div id="chart" data-spy="affix" align="right" class="">
 				</div>
+            
             </div>
-            </div>
-        </div>
-    </div>
+      
             <hr>
-
+</div>
            <!--  <footer>
                 <p>&copy; Company 2012</p>
             </footer> -->
